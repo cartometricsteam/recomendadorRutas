@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recomendador de rutas</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
+  <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles-merged.css">
+  <link rel="stylesheet" href="assets/css/style.min.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+  <!--[if lt IE 9]>
+      <script src="js/vendor/html5shiv.min.js"></script>
+      <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDovCFV9F1BPCmjwCWGHbrQRL93gBVColY",
+        authDomain: "recomendador-792e5.firebaseapp.com",
+        databaseURL: "https://recomendador-792e5.firebaseio.com",
+        projectId: "recomendador-792e5",
+        storageBucket: "recomendador-792e5.appspot.com",
+        messagingSenderId: "858718065967"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+
+</head>
+
+<body>
+
+
+
+
+  <!-- START: header -->
+  <header role="banner" class="probootstrap-header">
+    <div class="container-fluid">
+      <!-- <div class="row"> -->
+      <a href="index.html" class="probootstrap-logo" style="font-size:10px!important">Sistema Recomendador de Rutas</a>
+
+      <a href="#" class="probootstrap-burger-menu visible-xs">
+        <i>Menu</i>
+      </a>
+      <div class="mobile-menu-overlay"></div>
+
+      <nav role="navigation" class="probootstrap-nav hidden-xs">
+        <ul class="probootstrap-main-nav navbar-right">
+          <li>
+            <a href="">Recomendadores</a>
+          </li>
+          <li>
+            <a href="">Utilidades</a>
+          </li>
+          <li>
+            <a href="saberMas.html">Contacto</a>
+          </li>
+
+          <li><a href="registro.html">Regístrate</a></li>
+                  <li class="dropdown">
+                     <a href="" class="dropdown-toggle" data-toggle="dropdown">Accede <b class="caret"></b></a>
+                     <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                        <li>
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" >
+                                    <div class="form-group">
+                                       <label class="sr-only">Email</label>
+                                       <input type="email" class="form-control" id="email2" placeholder="Email" required>
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="sr-only">Contraseña</label>
+                                       <input type="contrasena" class="form-control" id="contrasena" placeholder="Contraseña" required>
+                                    </div>
+                                    <div class="checkbox">
+                                       <label>
+                                       <input type="checkbox"> Recordarme
+                                       </label>
+                                    </div>
+                                    <div class="form-group">
+                                       <button onclick="ingreso()">Acceso</button>
+                                    </div>
+                                 </form>
+                              </div>
+                           </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                           <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+                           <input class="btn btn-primary btn-block" type="button" id="sign-in-facebook" value="Sign In with Facebook">
+                        </li>
+                     </ul>
+                  </li>
+                </li>
+
+        </ul>
+        <div class="extra-text visible-xs">
+          <a href="#" class="probootstrap-burger-menu">
+            <i>Menu</i>
+          </a>
+          <h5>Social</h5>
+          <ul class="social-buttons">
+            <li>
+              <a href="https://twitter.com/geografiamalaga">
+                <i class="icon-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/geouma">
+                <i class="icon-facebook"></i>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+      </nav>
+
+
+
+
+
+      <section class="probootstrap-intro">
+        <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="hero-section-caption">
+          <h1 class="hero-title">Sistema recomendador de rutas</h1>
+
+              <div class="probootstrap-subtitle probootstrap-animate">
+                <h2>Visualiza, personaliza y gestiona las mejores rutas senderistas de los distintos parajes de la península</h2>
+              </div>
+          <a href="saberMas.html" class="btn btn-primary" style="border-radius: 25px!important">Acerca de nosotros</a> </div>
+
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div>
+                <img src="assets/img/portada.png" style=" margin:30px; margin-top:30px; margin-left:30px" class="img-responsive center-block">
+                </div>
+      </div>
+    </div>
+  </div>
+
+      </section>
+
+      <!-- </div> -->
+    </div>
+
+  </header>
+  <!-- END: header -->
+
+  <!-- START: section -->
+
+
+  <section class="probootstrap-section">
+    <div class="row">
+        <div class="col-md-12 section-heading text-center">
+          <h2 style=" margin:30px; padding-bottom:10px;margin-top:1px; padding-top:1px!important">Recomendadores</h2>
+          <p style=" margin:30px; color:#000000; margin-bottom:90px!important">Los recomendadores están clasificados por zonas naturales. ¡Elige una zona natural y descubre los maravillosos paisajes que tienen reservado para ti! </p>
+        </div>
+      </div>
+
+    <div class="row">
+         <div class="col-lg-6">
+           <div class="card text-center" style="width: 18em; float:none; margin:0 auto;  border-radius:20px;">
+             <a href="sierraNieves.html"><img class="card-img-top" style="display: block; height: auto; max-width: 100%; margin-left:auto; margin-right:auto;" src="assets/img/cabra.png"></a>
+           <div class="card-body">
+             <a href="sierraNieves.html"><h5 class="card-title" style="margin-top:15px">Recomendador de rutas de Sierra de las Nieves</h5></a>
+             <a href="sierraNieves.html"><p class="card-text" style="margin-left:3rem;margin-right:3rem;margin-bottom:4rem;">¡Descúbrelo!</p></a>
+             </div>
+           </div>
+         </div>
+
+         <div class="col-lg-6">
+           <div class="card text-center" style="width: 18em; float:none; margin:0 auto;  border-radius:20px;">
+             <a href=""><img class="card-img-top" style="display: block; height: auto; max-width: 100%; margin-left:auto; margin-right:auto;" src="assets/img/montesMalaga.png"></a>
+           <div class="card-body">
+             <a href=""><h5 class="card-title" style="margin-top:15px">Recomendador de rutas de los Montes de Málaga</h5></a>
+             <a href=""><p class="card-text" style="margin-left:3rem;margin-right:3rem;margin-bottom:4rem; ">Próximamente</p></a>
+             </div>
+           </div>
+         </div>
+       </div>
+
+  </section>
+
+
+
+<section class="probootstrap-feature-first">
+  <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 style=" margin:30px; margin-top:60px!important">Planifica una salida a la naturaleza</h2>
+        <p style=" margin:30px; margin-bottom:70px!important; color:#000000">El recomendador de rutas pretende facilitarte la planificación ofreciéndote rutas según tu perfil físico, el tiempo disponible<br> o la motivación de la ruta,
+          ya sea zonas verdes de valor ecológico o rutas deportivas ✌</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="text-center">
+      <img class="text-center"  src="assets/img/poste.png">
+      </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="text-left" style="padding-bottom:100px; margin:30px">
+          <p style="margin-top:20px; color:#343534!important">-Introduce el inicio y final de la ruta que quieras y el recomendador te calculará <b>la ruta más corta</b> teniendo en cuenta la altitud.</p>
+          <p style="color:#343534!important">-Si seleccionas <b>puntos intermedios</b> en una ruta el recomendador te calculará la ruta más corta entre esos puntos.</p>
+          <p style="color:#343534!important">-Introduce tu perfil de usuario y el recomendador te dará las rutas <b>según ese perfil (altura, peso, edad, etc..)</b></p>
+          <p style="color:#343534!important">-Elige entre <b>motivación paisajística, deportiva, forestal o paseo</b> y  el recomendador te seleccionará las mejores.</p>
+      </div>
+      </div>
+    </div>
+
+
+</section>
+
+
+
+  <!-- REGISTRO -->
+<section class="probootstrap-header">
+  <div class="container">
+    <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+        <h1 style="color:#fff;  margin:30px">Vive una experiencia única en la naturaleza ayudándote del recomendador y
+                                    descubre las mejores rutas 😎</h1>
+
+
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="text-center" style=" margin:70px">
+                <a href="registro.html" class="btn btn-primary" style="border-radius: 25px!important">REGÍSTRATE</a>
+              </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="text-center" style="padding-top:90px; padding-bottom:30px">
+                        <img class="text-center"  src="assets/img/logo.png">
+              </div>
+      </div>
+    </div>
+</div>
+</section>
+
+
+
+
+  <!-- PARTNERS -->
+<section class="probootstrap-section">
+
+<div class="container" style="padding-bottom:50px;">
+        <h2 class="text-center text-uppercase text-secondary mb-0" style="padding-bottom:50px">Colaboran</h2>
+          <div class="row">
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <img class="img-fluid" style="padding-bottom:50px; padding-left:8rem" src="assets/img/cartometrics.png" >
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <img class="img-fluid" style="padding-bottom:50px; padding-left:8rem" src="assets/img/equipo.png">
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <img class="img-fluid " style="padding-bottom:50px; padding-left:8rem" src="assets/img/promalaga.png" >
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3">
+              <img class="img-fluid" style="padding-bottom:50px; padding-left:8rem" src="assets/img/catedra.png" >
+            </div>
+          </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer role="contentinfo" class="probootstrap-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="probootstrap-footer-widget">
+            <h3>Sobre nosotros</h3>
+            <p>Esta web es parte de los resultados de un proyecto desarrollado por investigadores de los departamentos de Geografía
+              y Lenguaje y Ciencias de la Computación de la Universidad de Málaga.</p>
+            <p>
+              <a href="saberMas.html" class="link-with-icon">Saber más
+                <i class=" icon-chevron-right"></i>
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="probootstrap-footer-widget">
+            <h3>Servicios</h3>
+            <p>
+              <a href="#">Recomendadores</a>
+              <p>
+                <a href="utilidades.html">Utilidades</a>
+                <p>
+                  <a href="registro.html">Registro</a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="probootstrap-footer-widget">
+            <h3>Contacto</h3>
+            <ul class="probootstrap-contact-info">
+              <li>
+                <i class="icon-location2"></i>
+                <span>Despacho: 111 / Torre I - Facultad de Filosofía y Letras. Málaga, Málaga.</span>
+              </li>
+              <li>
+                <i class="icon-mail"></i>
+                <a href="mailto:jmvias@uma.es">jmvias@uma.es</a>
+              </li>
+              <li>
+                <i class="icon-phone2"></i>
+                <a href="tel:+34952133443">+34952133443</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt40">
+        <div class="col-md-12 text-center">
+          <ul class="probootstrap-footer-social">
+            <li>
+              <a href="https://twitter.com/geografiamalaga">
+                <i class="icon-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/geouma">
+                <i class="icon-facebook"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- END: footer -->
+
+
+  <script src="assets/js/scripts.min.js"></script>
+  <script src="assets/js/login.js"></script>
+
+  <script src="assets/js/main.min.js"></script>
+</body>
+
+</html>
